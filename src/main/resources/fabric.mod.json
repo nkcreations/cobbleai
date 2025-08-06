@@ -1,25 +1,28 @@
 {
   "schemaVersion": 1,
   "id": "cobblemonsidemod",
-  "version": "${version}",
+  "version": "1.0.0",
   "name": "Cobblemon Side Mod",
-  "description": "A side mod for Cobblemon with new behaviors.",
+  "description": "A side-mod for Cobblemon adding custom behaviors.",
   "authors": [
-    "User"
+    "TuNombre"
   ],
-  "contact": {},
+  "contact": {
+    "homepage": "https://www.ejemplo.com/",
+    "sources": "https://www.github.com/TuNombre/repo"
+  },
   "license": "MIT",
+  "icon": "assets/cobblemonsidemod/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
       "com.example.cobblemonsidemod.CobblemonSideMod"
     ]
   },
-  "mixins": [],
   "depends": {
-    "fabricloader": ">=0.15.7",
-    "fabric-api": "*",
-    "minecraft": "~1.20.1",
-    "cobblemon": ">=1.5.2"
+    "fabricloader": ">=0.14.0",
+    "minecraft": ">=1.20.1",
+    "java": ">=17",
+    "cobblemon": ">=1.4.0"
   }
 }
