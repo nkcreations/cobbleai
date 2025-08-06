@@ -1,6 +1,8 @@
+import java.net.URI
+
 pluginManagement {
     repositories {
-        maven { url = "https://maven.fabricmc.net/" }
+        maven { url = URI("https://maven.fabricmc.net/") }
         mavenCentral()
         gradlePluginPortal()
     }

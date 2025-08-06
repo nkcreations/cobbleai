@@ -1,20 +1,19 @@
-// Archivo: CuriousGoal.java
-// Implementa el comportamiento curioso de seguir al jugador.
 package com.example.cobblemonsidemod;
 
+import com.cobblemon.mod.common.entity.pokemon.PokemonEntity;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+
 import java.util.EnumSet;
 
 public class CuriousGoal extends Goal {
-    private final MobEntity mob;
+    private final PokemonEntity pokemonEntity;
     private final double speed;
     private final float maxDistance;
     private PlayerEntity targetPlayer;
 
-    public CuriousGoal(MobEntity mob, double speed, float maxDistance) {
-        this.mob = mob;
+    public CuriousGoal(PokemonEntity pokemonEntity, double speed, float maxDistance) {
+        this.pokemonEntity = pokemonEntity;
         this.speed = speed;
         this.maxDistance = maxDistance;
         this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
@@ -22,11 +21,14 @@ public class CuriousGoal extends Goal {
 
     @Override
     public boolean canStart() {
-        this.targetPlayer = this.mob.getWorld().getClosestPlayer(this.mob, this.maxDistance);
+        if (!this.pokemonEntity.getPokemon().getSpecies().getName().equalsIgnoreCase("spheal")) {
+            return false;
+        }
+        this.targetPlayer = this.pokemonEntity.getWorld().getClosestPlayer(this.pokemonEntity, this.maxDistance);
         if (this.targetPlayer == null) {
             return false;
         }
-        return this.mob.squaredDistanceTo(this.targetPlayer) <= (this.maxDistance * this.maxDistance);
+        return this.pokemonEntity.squaredDistanceTo(this.targetPlayer) <= (this.maxDistance * this.maxDistance);
     }
 
     @Override
@@ -34,25 +36,25 @@ public class CuriousGoal extends Goal {
         if (this.targetPlayer == null || !this.targetPlayer.isAlive()) {
             return false;
         }
-        if (this.mob.squaredDistanceTo(this.targetPlayer) > (this.maxDistance * this.maxDistance)) {
+        if (this.pokemonEntity.squaredDistanceTo(this.targetPlayer) > (this.maxDistance * this.maxDistance)) {
             return false;
         }
-        return !this.mob.getNavigation().isIdle();
+        return !this.pokemonEntity.getNavigation().isIdle();
     }
 
     @Override
     public void start() {
-        this.mob.getNavigation().startMovingTo(this.targetPlayer, this.speed);
+        this.pokemonEntity.getNavigation().startMovingTo(this.targetPlayer, this.speed);
     }
 
     @Override
     public void stop() {
-        this.mob.getNavigation().stop();
+        this.pokemonEntity.getNavigation().stop();
         this.targetPlayer = null;
     }
 
     @Override
     public void tick() {
-        this.mob.getLookControl().lookAt(this.targetPlayer, 10.0F, (float) this.mob.getMaxLookPitchChange());
+        this.pokemonEntity.getLookControl().lookAt(this.targetPlayer, 10.0F, (float) this.pokemonEntity.getMaxLookPitchChange());
     }
 }
