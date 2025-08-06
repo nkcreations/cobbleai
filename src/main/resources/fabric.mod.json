@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "cobblemonsidemod",
+  "version": "${version}",
+  "name": "Cobblemon Side Mod",
+  "description": "A side mod for Cobblemon with new behaviors.",
+  "authors": [
+    "User"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.example.cobblemonsidemod.CobblemonSideMod"
+    ]
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": ">=0.15.7",
+    "fabric-api": "*",
+    "minecraft": "~1.20.1",
+    "cobblemon": ">=1.5.2"
+  }
+}
